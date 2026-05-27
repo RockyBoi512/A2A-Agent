@@ -1,0 +1,10 @@
+schemaVersion: "1.0"
+name: "onboarding_assignment_capability"
+description: "MILP-optimized consultant-to-customer assignment with capacity analysis"
+protocol: "a2a"
+system_aliases:
+  - "ONBOARDING_AGENT"
+functions:
+  - "functions/onboarding_agent.yaml"
+scenarios:
+  - "scenarios/onboarding/onboarding.yaml"

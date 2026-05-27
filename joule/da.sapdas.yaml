@@ -1,0 +1,5 @@
+schemaVersion: "1.0"
+name: "onboarding_assignment"
+description: "Onboarding Customer Assignment Digital Assistant"
+capabilities:
+  - "a2a/capability.sapdas.yaml"

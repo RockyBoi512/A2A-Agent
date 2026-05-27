@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://experience.sap.com/fonts/72-web/72-Regular.css');
+@import url('https://experience.sap.com/fonts/72-web/72-Bold.css');
+@import url('https://experience.sap.com/fonts/72-web/72-Light.css');
+
+body {
+  font-family: '72', '72full', Arial, Helvetica, sans-serif;
+  background: #F5F6F7;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #BCC3CA; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #6A6D70; }
+
+/* Markdown content in chat */
+.chat-content p { margin-bottom: 0.5rem; }
+.chat-content ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+.chat-content ol { list-style: decimal; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+.chat-content strong { font-weight: 700; }
+.chat-content table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; font-size: 0.8125rem; }
+.chat-content th { background: #F5F6F7; border: 1px solid #E5E5E5; padding: 0.4rem 0.6rem; text-align: left; font-weight: 600; }
+.chat-content td { border: 1px solid #E5E5E5; padding: 0.4rem 0.6rem; }
+.chat-content code { background: #F5F6F7; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.8125rem; }

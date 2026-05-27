@@ -1,0 +1,14 @@
+schemaVersion: "1.0"
+name: "onboarding_scenario"
+description: "Customer onboarding assignment optimization scenario"
+steps:
+  - function: "onboarding_agent"
+    description: "Process user request through the assignment agent"
+triggers:
+  - "assign customers"
+  - "consultant capacity"
+  - "onboarding assignment"
+  - "run optimization"
+  - "look up consultant"
+  - "top performers"
+  - "scoring methodology"

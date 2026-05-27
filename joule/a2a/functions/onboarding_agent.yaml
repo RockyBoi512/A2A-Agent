@@ -1,0 +1,14 @@
+schemaVersion: "1.0"
+name: "onboarding_agent"
+description: "Onboarding Assignment Agent - assigns customers to consultants using MILP optimization"
+parameters:
+  - name: "message"
+    type: "string"
+    description: "User message or query about assignments, consultants, or capacity"
+    required: true
+examples:
+  - "Show me the regional capacity overview"
+  - "Look up consultant John Smith"
+  - "Who are the top 5 consultants?"
+  - "Run assignment for customers: {\"APJ\": [\"C001\"], \"NA\": [\"C002\"]}"
+  - "How does the scoring work?"
