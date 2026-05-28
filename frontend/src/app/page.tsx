@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface Message {
   role: 'user' | 'assistant' | 'system'
@@ -234,7 +235,7 @@ export default function Home() {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto px-4 py-6">
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-full mx-auto space-y-4 px-2">
             {messages.map((msg, i) => (
               <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                 {msg.role !== 'user' && (
@@ -243,7 +244,7 @@ export default function Home() {
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`min-w-0 flex-1 max-w-[95%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-sap-blue text-white'
                       : msg.role === 'system'
@@ -252,8 +253,8 @@ export default function Home() {
                   }`}
                 >
                   {msg.role === 'assistant' ? (
-                    <div className="chat-content">
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    <div className="chat-content overflow-x-auto">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
                     </div>
                   ) : (
                     <p>{msg.content}</p>
@@ -289,7 +290,7 @@ export default function Home() {
 
         {/* Input */}
         <div className="border-t border-sap-gray-200 bg-white p-4 shrink-0">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-full mx-auto">
             <div className="flex gap-2">
               <input
                 type="text"

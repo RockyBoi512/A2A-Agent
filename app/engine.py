@@ -68,7 +68,7 @@ def clean_dataframe(raw_df):
 
     rename_map = {
         'Monthly Capacity':                              'Total_Capacity',
-        'Current Workload':                              'Current_Clients',
+        'Current Workload(Max 25)':                      'Current_Clients',
         'WT(Willingness to take)':                       'Willingness',
         'COMS(Customers completed from day 1)':          'COMS',
         'Experience(Customers completed from day 1)':    'COMS',

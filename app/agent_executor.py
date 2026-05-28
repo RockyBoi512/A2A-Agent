@@ -2,7 +2,6 @@
 #  A2A Executor Bridge — Connects A2A protocol to LangGraph agent
 # ══════════════════════════════════════════════════════════════════════════
 
-import json
 import logging
 from typing import AsyncGenerator
 
