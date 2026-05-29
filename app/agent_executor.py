@@ -38,9 +38,14 @@ async def execute_agent(user_message: str, session_id: str = "default") -> Async
             config={"configurable": {"thread_id": session_id}},
         )
 
-        # Extract the final AI message
+        # Extract tool outputs and final AI message
+        tool_outputs = [m.content for m in result["messages"] if m.type == "tool" and m.content]
         ai_messages = [m for m in result["messages"] if m.type == "ai" and m.content]
-        if ai_messages:
+
+        if tool_outputs:
+            # Return tool output verbatim — the LLM always reformats/collapses it
+            final_content = "\n\n".join(tool_outputs)
+        elif ai_messages:
             final_content = ai_messages[-1].content
         else:
             final_content = "I processed your request but have no additional response."
