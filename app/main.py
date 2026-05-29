@@ -190,6 +190,7 @@ FRONTEND_DIR = Path(__file__).parent.parent / "frontend" / "out"
 class ChatRequest(BaseModel):
     message: str
     customer_data: Optional[str] = None
+    cross_region_pcts: Optional[dict] = None
     history: Optional[list] = None
 
 
@@ -199,6 +200,8 @@ async def api_chat(req: ChatRequest):
     user_text = req.message
     if req.customer_data and any(k in user_text.lower() for k in ['assign', 'run', 'optimize']):
         user_text += f"\n\nCustomer data JSON: {req.customer_data}"
+        if req.cross_region_pcts and any(v > 0 for v in req.cross_region_pcts.values()):
+            user_text += f"\n\nCross-region percentages (redirect to APJ): {req.cross_region_pcts}"
 
     final_content = ""
     async for event in execute_agent(user_text, "web-ui"):

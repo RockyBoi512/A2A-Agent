@@ -129,15 +129,19 @@ def get_top_consultants(n: int = 10) -> str:
 
 
 @tool
-def run_assignment(customer_data: dict) -> str:
+def run_assignment(customer_data: dict, cross_region_pcts: Optional[dict] = None) -> str:
     """Run the MILP optimization to assign customers to consultants.
-    Input: dict with region keys (APJ, MEE, EMEA, GC, LAC, NA) and lists of customer ID strings.
+    Input: customer_data dict with region keys (APJ, MEE, EMEA, GC, LAC, NA) and lists of customer ID strings.
+    Optional: cross_region_pcts dict e.g. {"MEE": 20, "EMEA": 0, "NA": 10, "LAC": 0} — % of customers to redirect to APJ.
     Example: {"APJ": ["C001", "C002"], "NA": ["C003"], "EMEA": [], "MEE": [], "GC": [], "LAC": []}
     Use when user wants to run assignment, optimize, or allocate customers."""
     if store.df_scored is None:
         return "No consultant data loaded. Please provide consultant data first."
 
-    cust_data = {k.upper(): v for k, v in customer_data.items()}
+    cust_data = {k.upper(): [str(v) for v in vals] for k, vals in customer_data.items()}
+    cross_pcts = {}
+    if cross_region_pcts:
+        cross_pcts = {k.upper(): int(v) for k, v in cross_region_pcts.items() if int(v) > 0}
 
     valid_regions = set(REGION_LABELS.keys())
     for region in cust_data:
@@ -149,7 +153,7 @@ def run_assignment(customer_data: dict) -> str:
         return "No customers to assign. Add customer IDs to the region arrays."
 
     df = store.df.copy()
-    result = run_full_engine(df, cust_data)
+    result = run_full_engine(df, cust_data, cross_region_pcts=cross_pcts)
 
     assignments        = result['assignments']
     total_assigned     = result['total_assigned']
